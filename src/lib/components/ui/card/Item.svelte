@@ -9,14 +9,14 @@
 	export let rotateY: number | string | undefined = 0;
 	export let rotateZ: number | string | undefined = 0;
 	export let isMouseEntered: boolean = false;
-
+	export let isHoverTransform: boolean = false;
 	let ref: HTMLDivElement;
 
 	$: isMouseEntered, handleAnimations();
 
 	const handleAnimations = () => {
 		if (!ref) return;
-		if (isMouseEntered) {
+		if (isMouseEntered && isHoverTransform) {
 			ref.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
 		} else {
 			ref.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;

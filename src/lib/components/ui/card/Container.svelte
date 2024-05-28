@@ -10,6 +10,9 @@
 
 	export let stopRecording = false;
 
+	export let isMouseTrackRecord: boolean = false;
+	export let isTransform: boolean = false;
+
 	type Point = {
 		x: number;
 		y: number;
@@ -72,7 +75,7 @@
 			};
 			const distance = getDistance({ oldData, newData });
 			const timeInterval = getTimeInterval({ oldData, newData });
-			console.log('distance-time interval', distance, timeInterval);
+			// console.log('distance-time interval', distance, timeInterval);
 			if (distance >= distanceThreshold && timeInterval > timeThreshold) {
 				mouseData.update((data) => [
 					...data,
@@ -92,14 +95,17 @@
 	let containerRef: HTMLDivElement;
 
 	function handleMouseMove(event: MouseEvent): void {
-		const temp = recordMouseMovement(oldData, event, 10, 10000, true);
-		oldData = { point: temp.point, timestamp: temp.timestamp };
+		if (isMouseTrackRecord) {
+			const temp = recordMouseMovement(oldData, event, 10, 500, true);
+			oldData = { point: temp.point, timestamp: temp.timestamp };
+		}
 
-		// if (!containerRef) return;
-		// const { left, top, width, height } = containerRef.getBoundingClientRect();
-		// const x = (event.clientX - left - width / 2) / 25;
-		// const y = (event.clientY - top - height / 2) / 25;
-		// containerRef.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+		if (!containerRef || !isTransform) return;
+
+		const { left, top, width, height } = containerRef.getBoundingClientRect();
+		const x = (event.clientX - left - width / 2) / 25;
+		const y = (event.clientY - top - height / 2) / 25;
+		containerRef.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
 	}
 
 	const handleMouseEnter = (e: MouseEvent) => {
@@ -126,7 +132,7 @@
 </script>
 
 <div
-	class={cn('flex items-center justify-center py-20', containerClassName)}
+	class={cn('flex items-center justify-center', containerClassName)}
 	style="perspective: 1000px;"
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
