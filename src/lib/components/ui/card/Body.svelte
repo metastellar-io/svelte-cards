@@ -6,7 +6,7 @@
 
 <div
 	class={cn(
-		'h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]',
+		'h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d] card-body',
 		className
 	)}
 >
