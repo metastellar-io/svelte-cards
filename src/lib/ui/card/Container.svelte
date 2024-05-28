@@ -91,17 +91,15 @@
 	};
 	let containerRef: HTMLDivElement;
 
-	// const handleMouseMove = (e: MouseEvent) => {
-	// 	if (!containerRef) return;
-	// 	const { left, top, width, height } = containerRef.getBoundingClientRect();
-	// 	const x = (e.clientX - left - width / 2) / 25;
-	// 	const y = (e.clientY - top - height / 2) / 25;
-	// 	containerRef.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-	// };
-
 	function handleMouseMove(event: MouseEvent): void {
 		const temp = recordMouseMovement(oldData, event, 10, 10000, true);
 		oldData = { point: temp.point, timestamp: temp.timestamp };
+
+		// if (!containerRef) return;
+		// const { left, top, width, height } = containerRef.getBoundingClientRect();
+		// const x = (event.clientX - left - width / 2) / 25;
+		// const y = (event.clientY - top - height / 2) / 25;
+		// containerRef.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
 	}
 
 	const handleMouseEnter = (e: MouseEvent) => {
@@ -138,7 +136,7 @@
 		on:mousemove={handleMouseMove}
 		on:mouseleave={handleMouseLeave}
 		class={cn(
-			'relative flex items-center justify-center transition-all duration-200 ease-linear',
+			'relative flex items-center justify-center transition-all duration-200 ease-linear  card-container',
 			className
 		)}
 		style="transform-style: preserve-3d;"
