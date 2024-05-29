@@ -103,8 +103,8 @@
 		if (!containerRef || !isTransform) return;
 
 		const { left, top, width, height } = containerRef.getBoundingClientRect();
-		const x = (event.clientX - left - width / 2) / 25;
-		const y = (event.clientY - top - height / 2) / 25;
+		const x = (-1*(event.clientX - left - width / 2)) / 100;
+		const y = (event.clientY - top - height / 2) / 100;
 		containerRef.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
 	}
 
@@ -142,7 +142,7 @@
 		on:mousemove={handleMouseMove}
 		on:mouseleave={handleMouseLeave}
 		class={cn(
-			'relative flex items-center justify-center transition-all duration-200 ease-linear  card-container',
+			'relative flex items-center justify-center transition-all duration-100 ease-linear  card-container',
 			className
 		)}
 		style="transform-style: preserve-3d;"
