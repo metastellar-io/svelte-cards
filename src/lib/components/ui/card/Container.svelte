@@ -103,8 +103,8 @@
 		if (!containerRef || !isTransform) return;
 
 		const { left, top, width, height } = containerRef.getBoundingClientRect();
-		const x = (event.clientX - left - width / 2) / 25;
-		const y = (event.clientY - top - height / 2) / 25;
+		const x = (-1*(event.clientX - left - width / 2)) / 45;
+		const y = (event.clientY - top - height / 2) / 45;
 		containerRef.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
 	}
 
